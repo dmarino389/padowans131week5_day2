@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Pokemon Form{% endblock %}
+
+{% block header %}Pokemon Form{% endblock %}
+
+{% block content %}
+    <!-- Your form and content for the Pokemon form page -->
+    <form method="POST" action="{{ url_for('pokemon_form') }}" class="d-flex" role="search">
+        {{ form.hidden_tag() }}
+        {{ form.pokemon_name(class = 'form-control') }}
+        {{ form.submit(class = 'btn btn-danger') }}
+    </form>
+
+    {% if pokemon_info %}
+        <h2>Pokemon Information:</h2>
+        <p>Name: {{ pokemon_info['name'] }}</p>
+        <p>HP: {{ pokemon_info['hp'] }}</p>
+        <p>Defense: {{ pokemon_info['defense'] }}</p>
+        <p>Attack: {{ pokemon_info['attack'] }}</p>
+        <img src="{{ pokemon_info['sprite'] }}" alt="Shiny Sprite">
+        <p>Abilities: {{ pokemon_info['abilities'] }}</p>
+    {% endif %}
+{% endblock %}
