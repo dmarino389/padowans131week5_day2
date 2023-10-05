@@ -1,10 +1,11 @@
 from flask import render_template, request, flash, redirect, url_for
-from app import app, db, login_manager
+from app import app
 from app.forms import PokemonForm, RegistrationForm, LoginForm
 from app.utils import fetch_pokemon_info
-from app.models import User
+from app.models import User, db
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+
 
 user_pokemon_data = {}  # Your in-memory database
 

@@ -1,16 +1,25 @@
 from flask import Flask
-import secrets
-from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_login import LoginManager
+from .models import db, User
+from config import Config
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = secrets.token_hex(16)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-db = SQLAlchemy(app)
+app.config.from_object(Config)
+db.init_app(app)
+migrate = Migrate(app, db)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'  # Specify the login route
+login_manager.login_view = 'login' 
 
-from app import routes, models
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+from . import routes
+
+
