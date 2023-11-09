@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-5">Opponents</h1>
+            
+            {% if opponents %}
+            <div class="row">
+                {% for opponent in opponents %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ opponent.username }}</h5>
+                            <a href="{{ url_for('battle', opponent_id=opponent.id) }}" class="btn btn-danger">Attack</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="lead">There are no opponents available at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Battle Result</h2>
+
+        <p>The battle between <strong>{{ current_user.username }}</strong> and <strong>{{ opponent.username }}</strong> has concluded!</p>
+        
+        <h3>The winner is: <span class="text-success">{{ winner.username }}</span></h3>
+
+        <h4>Your Team:</h4>
+        <ul>
+        {% for pokemon in current_user.user_pokemon %}
+            <li>
+                <strong>{{ pokemon.name }}</strong> - Attack: {{ pokemon.attack }}, Defense: {{ pokemon.defense }}, HP: {{ pokemon.hp }}
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h4>Opponent's Team:</h4>
+        <ul>
+        {% for pokemon in opponent.user_pokemon %}
+            <li>
+                <strong>{{ pokemon.name }}</strong> - Attack: {{ pokemon.attack }}, Defense: {{ pokemon.defense }}, HP: {{ pokemon.hp }}
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h4>Records:</h4>
+        <p><strong>{{ current_user.username }}</strong> - Wins: {{ current_user.wins }}, Losses: {{ current_user.losses }}</p>
+        <p><strong>{{ opponent.username }}</strong> - Wins: {{ opponent.wins }}, Losses: {{ opponent.losses }}</p>
+
+        <a href="{{ url_for('home') }}">Return Home</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "driver": "PostgreSQL",
+      "name": "Pokedex",
+      "connectString": "postgres://vtgrzhym:meVSrOj_hK9yhOX6cp7rnH4hwGpvcGhd@peanut.db.elephantsql.com/vtgrzhym"
+    }
+  ],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.formatting.provider": "none"
+}

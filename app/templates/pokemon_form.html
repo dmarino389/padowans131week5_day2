@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Pokemon Form{% endblock %}
+
+{% block header %}Pokemon Form{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Form Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="{{ url_for('pokemon_form') }}" role="search">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.pokemon_name.label(class="form-label") }}
+                    {{ form.pokemon_name(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.submit(class='btn btn-danger') }}
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Form Section -->
+
+    {% if pokemon_info %}
+    <!-- Pokemon Information Section -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2>Pokemon Information:</h2>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Name:</strong> {{ pokemon_info['name'] }}</li>
+                <li class="list-group-item"><strong>HP:</strong> {{ pokemon_info['hp'] }}</li>
+                <li class="list-group-item"><strong>Defense:</strong> {{ pokemon_info['defense'] }}</li>
+                <li class="list-group-item"><strong>Attack:</strong> {{ pokemon_info['attack'] }}</li>
+                <li class="list-group-item">
+                    <img src="{{ pokemon_info['sprite'] }}" alt="{{ pokemon_info['name'] }}" class="img-fluid">
+                </li>
+                <li class="list-group-item"><strong>Abilities:</strong> {{ pokemon_info['abilities'] }}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Pokemon Information Section -->
+    {% endif %}
+</div>
+{% endblock %}

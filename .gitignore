@@ -1,0 +1,4 @@
+.env
+Pokemon
+__pycache__
+migrations

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-5">My Team</h1>
+            
+            {% if my_team %}
+            <div class="row">
+                {% for poke in my_team %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ poke.sprite }}" alt="{{ poke.name }} Sprite" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ poke.name }}</h5>
+                            <p class="card-text">
+                                <strong>HP:</strong> {{ poke.hp }} <br>
+                                <strong>Defense:</strong> {{ poke.defense }} <br>
+                                <strong>Attack:</strong> {{ poke.attack }}
+                            </p>
+                            <p><strong>Abilities:</strong></p>
+                            <ul>
+                                {% if poke.abilities %}
+                                {% for ability in poke.abilities.split(",") %}
+                                <li>{{ ability.strip() }}</li>
+                                {% endfor %}
+                                {% else %}
+                                <li>No abilities listed</li>
+                                {% endif %}
+                            </ul>
+                            <form action="{{ url_for('release_pokemon_by_id', pokemon_id=poke.id) }}" method="post">
+                                <button type="submit" onclick="return confirmRelease();" class="btn btn-danger">Release</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="lead">You currently have no Pokémon in your team.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+   function confirmRelease() {
+       return confirm("Are you sure you want to release this Pokémon?");
+   }
+</script>
+{% endblock %}
